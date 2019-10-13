@@ -1,0 +1,81 @@
+body {
+    display: grid;
+    border: 3px solid black;
+    width: 90%;
+    height: 700px;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+}
+* {
+    border-radius: 30px;
+    font-family: 'Varela Round', sans-serif;
+}
+.container {
+    height: 700px;
+    grid-template-columns: 1fr;
+    border: 3px solid blue;
+    margin: 0 auto;
+    width: 80%;
+    height: 90%;
+    margin-top: 10%;
+}
+
+.control {
+    text-align: center;
+    vertical-align: bottom;
+    border: 3px solid green;
+    height: 28%;
+    margin-top: 10%;
+    grid-template-columns: 1fr 1fr;
+    
+
+    
+    
+}
+.correct {
+    background-color: rgb(214, 218, 214);
+    width:45%;
+    height:140px;
+    margin:auto;
+    position: relative;
+    font-size: 100px;
+    color: green;
+}
+.wrong {
+    background-color: rgb(214, 218, 214);
+    width:45%;
+    height:140px;
+    margin:auto;
+    font-size: 100px;
+    color: red;
+}
+.equation {
+    border: 3px solid goldenrod;
+    margin: 0 auto;
+    width: 90%;
+    height: 40%;
+    margin-top: 10%;
+    text-align: center;
+}
+.start__button {
+    width: 40%;
+}
+h2  {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 70px;
+    font-weight: bold;
+    margin: 10%;
+}
+h1 {
+    font-size: 30px;
+    font-weight: bold;
+}
+h4  {
+    margin: auto 5px;
+}
+
+.timer  {
+    font-size: 30px; 
+}
