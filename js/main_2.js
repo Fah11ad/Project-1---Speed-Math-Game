@@ -1,3 +1,4 @@
+var flag = true 
 var arr = [
     {q: "7 + 5 = 12", a:"true"},
     {q: "3 + 8 = 9", a: "false"},
@@ -15,6 +16,7 @@ var arr = [
     {q: "6 + 8 = 14", a: "true"},
     {q: "9 + 12 = 18", a: "false"},
     {q: "7 + 4 = 13", a: "false"}, 
+    {q: "8 + 9 = 16", a: "false"}, 
 ];
 var $equation = document.querySelector("h2");
 var $startDiv = document.getElementsByClassName("start")
@@ -24,61 +26,61 @@ var $wrong = document.querySelector(".wrong");
 var seconds = 10;
 var score = 0;
 let count = 0;
-document.querySelector(".timer").innerHTML = seconds
-document.querySelector(".score").innerHTML = score
+document.querySelector(".timer")
+document.querySelector(".score").innerHTML = "Score: " + score
+
 
 // START the Game
 $start.addEventListener("click", function(){
    $equation.textContent = arr[count].q;
+   $($startDiv).hide();
+   myTimer();
+
 })    
+// Click buttons
+  $( ".click" ).click(function() {
+    console.log($(this).val())
+    if ($(this).val() == arr[count].a){
+        score++;
+        $(".score").text("Score: " + score);
+        seconds+=2;
+        $("timer").text(seconds);
+        count++;
+        $($equation).text(arr[count].q)
+        time = time+10
+        $(".bg-success").text(seconds--);
+    }
+        else{
+            $($equation).text("Game Over")
+            Swal.fire(
+                'Game Over',
+                'Your score is ' + score,
+              )
+            clearInterval(myTimer);
+            seconds = 0; 
+            flag = false
+        }
+  });
+  
+  var time = 100
+$('.bg-success').attr("style" , `width: ${time}%`)
 
-// to choose randomly equation -->  Done
-    
-    // set a true and false answers for green button only --> Done 
-    // array.forEach(element => {
+// Count Down Timer
+function myTimer(){
+    var timeCountDown = setInterval(function(){
+        $(".bg-success").text(seconds--);
+        $('.bg-success').attr("style" , `width: ${time}%`)
+        time = time - 10
         
-    // });
-    console.log($correct)
-    $correct.addEventListener("click", function(){
-        console.log(arr[count].a);
-        
-        if (arr[count].a == "true"){
-            score = score + 1;
-            count++
-            $equation.textContent = arr[count].q;
-            console.log(score);
-            
-            seconds++
-            
-      }else {
-          return alert("Game over. Your score is " + score)
-      }
-    });
-    $wrong.addEventListener("click", function(){
-        if(arr[count].a == "false"){
-            score = score + 1;
-            count++
-            $equation.textContent = arr[count].q;
-            console.log(score);
-            
-            seconds++
-            
-      }else {
-          return alert("Game over. Your score is " + score)
-      }
-    })
-    
+        if(seconds < 0) {
+            clearInterval(timeCountDown);
+            if (flag){
+            Swal.fire(
+                'Game Over',
+                'Your score is ' + score,
+              )    
+        }
+    }
+    },800) 
 
-    // set true and and false answers for red button -->
-   
-
-  
- // set timer function (setinterval) --> not completed
-// score box --> not completed
-// game over --> not completed
-
- 
-  
-     
-  
-  
+}
