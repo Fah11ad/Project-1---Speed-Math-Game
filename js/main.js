@@ -1,3 +1,4 @@
+var flag = true 
 var arr = [
     {q: "7 + 5 = 12", a:"true"},
     {q: "3 + 8 = 9", a: "false"},
@@ -15,41 +16,80 @@ var arr = [
     {q: "6 + 8 = 14", a: "true"},
     {q: "9 + 12 = 18", a: "false"},
     {q: "7 + 4 = 13", a: "false"}, 
+    {q: "8 + 9 = 16", a: "false"}, 
+    {q: "6 + 9 = 15", a: "true"}, 
+    {q: "3 + 5 = 7", a: "false"}, 
+    {q: "9 + 9 = 18", a: "true"}, 
+
 ];
 var $equation = document.querySelector("h2");
+var $startDiv = document.getElementsByClassName("start")
 var $start = document.querySelector("h1")
 var $correct = document.querySelector(".correct");
 var $wrong = document.querySelector(".wrong");
+var seconds = 10;
 var score = 0;
-// var $correct = addEventListener
+let count = 0;
+document.querySelector(".timer")
+document.querySelector(".score").innerHTML = "Score: " + score
 
 
-// to choose randomly equation -->  Done
-function shuffle(arr) {
-    var newIndex;
-    var oldIndex;
-  
-    for (var i = arr.length - 1; i > 0; i--) {
-        newIndex = Math.floor(Math.random() * (i + 1));
-        oldIndex = arr[i];
-        arr[i] = arr[newIndex];
-        arr[newIndex] = oldIndex;
+// START the Game
+$($start).click(function(){
+   $equation.textContent = arr[count].q;
+   $($startDiv).hide();
+   myTimer();  
+
+})    
+// Click buttons
+  $( ".click" ).click(function() {
+    console.log($(this).val())
+    if ($(this).val() == arr[count].a){
+        score++;
+        $(".score").text("Score: " + score);
+        seconds+=2;
+        $("timer").text(seconds);
+        count++;
+        $($equation).text(arr[count].q)
+        time = time+10
+        $(".bg-success").text(seconds--);
     }
-    $equation.textContent = arr[i].q;
-     // set a true and false answers for green button only --> Done 
-    $correct.addEventListener("click", function(){
-        if($correct.value === arr[i].a){
-            score ++;
-            alert("You are Right!")
-      }else {
-          return alert("Game over. Your score is " + score)
-      }
-    })
-  }
-  shuffle(arr)
+        else{
+            $($equation).text("Game Over")
+            Swal.fire(
+                'Game Over',
+                'Your score is ' + score,
+              )
+            clearInterval(myTimer);
+            seconds = 0; 
+            flag = false;
+            setTimeout(() =>{
+                location.reload();
+              }, 3000);
+        }
+  });
+  
+  var time = 100
+$('.bg-success').attr("style" , `width: ${time}%`)
 
- 
-  
-     
-  
-  
+// Count Down Timer
+function myTimer(){
+    var timeCountDown = setInterval(function(){
+        $(".bg-success").text(seconds--);
+        $('.bg-success').attr("style" , `width: ${time}%`)
+        time = time - 10
+        
+        if(seconds < 0) {
+            clearInterval(timeCountDown);
+            if (flag){
+            Swal.fire(
+                'Game Over',
+                'Your score is ' + score,
+              )
+              setTimeout(() =>{
+                location.reload();
+              }, 3000);   
+        }  
+    }
+    },800) 
+}
