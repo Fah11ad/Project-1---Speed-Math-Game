@@ -31,7 +31,7 @@ document.querySelector(".score").innerHTML = "Score: " + score
 
 
 // START the Game
-$start.addEventListener("click", function(){
+$($start).click(function(){
    $equation.textContent = arr[count].q;
    $($startDiv).hide();
    myTimer();
