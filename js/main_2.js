@@ -58,7 +58,10 @@ $start.addEventListener("click", function(){
               )
             clearInterval(myTimer);
             seconds = 0; 
-            flag = false
+            flag = false;
+            setTimeout(() =>{
+                location.reload();
+              }, 3000);
         }
   });
   
@@ -78,7 +81,11 @@ function myTimer(){
             Swal.fire(
                 'Game Over',
                 'Your score is ' + score,
-              )    
+              )
+              setTimeout(() =>{
+                location.reload();
+              }, 3000);
+            
         }
     }
     },800) 
