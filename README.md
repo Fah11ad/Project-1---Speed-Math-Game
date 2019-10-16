@@ -19,7 +19,7 @@ DOM manipulation
 Bootstrap
 ```
 
-### Wireframes
+### Planning and Development Process 
 
 Stage 1:
 * Create HTML file with necessary elements.
