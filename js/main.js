@@ -22,6 +22,15 @@ var arr = [
     {q: "9 + 9 = 18", a: "true"}, 
 
 ];
+var newArr = [];
+while(arr.length > newArr.length){
+  let randomIndex = Math.floor(Math.random() * arr.length); // for random equations
+  
+  if(newArr.indexOf(arr[randomIndex]) == -1){ // to avoid repeating equations
+      newArr.push(arr[randomIndex]);
+  }
+}console.log(newArr);
+
 var $equation = document.querySelector("h2");
 var $startDiv = document.getElementsByClassName("start")
 var $start = document.querySelector("h1")
@@ -36,21 +45,22 @@ document.querySelector(".score").innerHTML = "Score: " + score
 
 // START the Game
 $($start).click(function(){
-   $equation.textContent = arr[count].q;
+  $equation.textContent = newArr[count].q;
    $($startDiv).hide();
    myTimer();  
+console.log(newArr);
 
 })    
 // Click buttons
   $( ".click" ).click(function() {
     console.log($(this).val())
-    if ($(this).val() == arr[count].a){
+    if ($(this).val() == newArr[count].a){
         score++;
         $(".score").text("Score: " + score);
         seconds+=2;
         $("timer").text(seconds);
         count++;
-        $($equation).text(arr[count].q)
+        $($equation).text(newArr[count].q)
         time = time+10
         $(".bg-success").text(seconds--);
     }
